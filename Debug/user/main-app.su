@@ -1,0 +1,2 @@
+../user/main-app.c:22:6:mainInit	8	static
+../user/main-app.c:27:6:mainProcess	8	static
