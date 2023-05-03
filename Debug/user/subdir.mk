@@ -8,18 +8,21 @@ C_SRCS += \
 ../user/MPU6050.c \
 ../user/button.c \
 ../user/dwt_stm32_delay.c \
+../user/flash.c \
 ../user/main-app.c 
 
 OBJS += \
 ./user/MPU6050.o \
 ./user/button.o \
 ./user/dwt_stm32_delay.o \
+./user/flash.o \
 ./user/main-app.o 
 
 C_DEPS += \
 ./user/MPU6050.d \
 ./user/button.d \
 ./user/dwt_stm32_delay.d \
+./user/flash.d \
 ./user/main-app.d 
 
 
@@ -30,7 +33,7 @@ user/%.o user/%.su user/%.cyclo: ../user/%.c user/subdir.mk
 clean: clean-user
 
 clean-user:
-	-$(RM) ./user/MPU6050.cyclo ./user/MPU6050.d ./user/MPU6050.o ./user/MPU6050.su ./user/button.cyclo ./user/button.d ./user/button.o ./user/button.su ./user/dwt_stm32_delay.cyclo ./user/dwt_stm32_delay.d ./user/dwt_stm32_delay.o ./user/dwt_stm32_delay.su ./user/main-app.cyclo ./user/main-app.d ./user/main-app.o ./user/main-app.su
+	-$(RM) ./user/MPU6050.cyclo ./user/MPU6050.d ./user/MPU6050.o ./user/MPU6050.su ./user/button.cyclo ./user/button.d ./user/button.o ./user/button.su ./user/dwt_stm32_delay.cyclo ./user/dwt_stm32_delay.d ./user/dwt_stm32_delay.o ./user/dwt_stm32_delay.su ./user/flash.cyclo ./user/flash.d ./user/flash.o ./user/flash.su ./user/main-app.cyclo ./user/main-app.d ./user/main-app.o ./user/main-app.su
 
 .PHONY: clean-user
 

@@ -1,4 +1,9 @@
-user/MPU6050.o: ../user/MPU6050.c ../user/MPU6050.h \
+user/flash.o: ../user/flash.c \
+ C:/Users/LumiQA/STM32CubeIDE/workspace_1.12.0/compass_stm32f103c8/user/flash.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+ ../Core/Inc/stm32f1xx_hal_conf.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h \
  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h \
  ../Drivers/CMSIS/Include/core_cm3.h \
@@ -6,10 +11,6 @@ user/MPU6050.o: ../user/MPU6050.c ../user/MPU6050.h \
  ../Drivers/CMSIS/Include/cmsis_compiler.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
- ../Core/Inc/stm32f1xx_hal_conf.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h \
@@ -24,9 +25,12 @@ user/MPU6050.o: ../user/MPU6050.c ../user/MPU6050.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h ../user/flash.h \
- ../user/dwt_stm32_delay.h
-../user/MPU6050.h:
+ ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
+C:/Users/LumiQA/STM32CubeIDE/workspace_1.12.0/compass_stm32f103c8/user/flash.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
+../Core/Inc/stm32f1xx_hal_conf.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
 ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h:
 ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h:
 ../Drivers/CMSIS/Include/core_cm3.h:
@@ -34,10 +38,6 @@ user/MPU6050.o: ../user/MPU6050.c ../user/MPU6050.h \
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
-../Core/Inc/stm32f1xx_hal_conf.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:
-../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h:
@@ -53,5 +53,3 @@ user/MPU6050.o: ../user/MPU6050.c ../user/MPU6050.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-../user/flash.h:
-../user/dwt_stm32_delay.h:

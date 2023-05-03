@@ -33,7 +33,22 @@
 #define   INT_ENABLE 		0x38
 #define   mpu6050 			0x68
 
+typedef enum _AXIS_{
+	AXIS_X = 0,
+	AXIS_Y,
+	AXIS_Z,
+}axis_e;
+
+typedef struct {
+	int x_Axis;
+	int y_Axis;
+	int z_Axis;
+}driff_t;
+
+extern int16_t xAngle, yAngle, zAngle;
 void Mpu6050_Init(I2C_HandleTypeDef* mpuInitstructure, TIM_HandleTypeDef* timInitstructure);
+
+void MPU6050_Reset(void);
 
 int16_t GetData(unsigned char address);
 
@@ -43,6 +58,6 @@ void Mpu6050_Write(uint8_t adress,uint8_t data);
 
 unsigned char Mpu6050_Read(uint8_t adress);
 
-float getAntiDriffCoefficient(uint8_t numSample);
+float getAntiDriffCoefficient(uint8_t numSample, axis_e axis);
 
 #endif /* MPU6050_H_ */

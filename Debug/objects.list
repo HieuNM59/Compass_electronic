@@ -23,4 +23,5 @@
 "./user/MPU6050.o"
 "./user/button.o"
 "./user/dwt_stm32_delay.o"
+"./user/flash.o"
 "./user/main-app.o"

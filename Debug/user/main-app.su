@@ -1,2 +1,6 @@
-../user/main-app.c:22:6:mainInit	8	static
-../user/main-app.c:27:6:mainProcess	8	static
+../Drivers/CMSIS/Include/core_cm3.h:1762:34:__NVIC_SystemReset	4	static,ignoring_inline_asm
+../user/main-app.c:45:6:ledBlink	8	static
+../user/main-app.c:57:6:mainInit	8	static
+../user/main-app.c:87:6:mainProcess	8	static
+../user/main-app.c:128:6:sendAngleToMain	16	static
+../user/main-app.c:163:6:HAL_UART_RxCpltCallback	16	static

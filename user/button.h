@@ -9,11 +9,12 @@
 #define BUTTON_H_
 
 typedef enum {
-	HOLD_1S = 0,
+	IDLE = 0,
+	HOLD_1S,
 	HOLD_2S,
 	HOLD_3S,
 	HOLD_5S,
-	IDLE,
+
 }button_hold_event_e;
 
 extern button_hold_event_e g_buttonEvent;

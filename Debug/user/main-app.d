@@ -25,7 +25,7 @@ user/main-app.o: ../user/main-app.c ../user/dwt_stm32_delay.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../user/main-app.h ../user/MPU6050.h ../user/button.h
+ ../user/main-app.h ../user/MPU6050.h ../user/button.h ../user/flash.h
 ../user/dwt_stm32_delay.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -56,3 +56,4 @@ user/main-app.o: ../user/main-app.c ../user/dwt_stm32_delay.h \
 ../user/main-app.h:
 ../user/MPU6050.h:
 ../user/button.h:
+../user/flash.h:

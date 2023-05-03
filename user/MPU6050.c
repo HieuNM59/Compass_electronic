@@ -7,19 +7,17 @@
 
 
 #include "MPU6050.h"
+#include "flash.h"
 #include "dwt_stm32_delay.h"
 
 I2C_HandleTypeDef* mpu_handle;
 TIM_HandleTypeDef* tim_handle;
 
+extern driff_t  driffVal;
 
-int16_t TP_X,TP_Y,TP_Z;
-int16_t G_X,G_Y,G_Z;
-float mau[100];
-int16_t angle;
-uint8_t l=0,h=0;
-volatile int16_t s,j,a,hi;
-uint16_t k;
+float xLastVal, yLastVal, zLastVal;
+int16_t xAngle, yAngle, zAngle;
+volatile int16_t xS, yS, zS, xA, yA, zA, xVal, yVal, zVal;
 
 void Mpu6050_Init(I2C_HandleTypeDef* mpuInitstructure, TIM_HandleTypeDef* timInitstructure)
 {
@@ -44,6 +42,10 @@ void Mpu6050_Init(I2C_HandleTypeDef* mpuInitstructure, TIM_HandleTypeDef* timIni
 	HAL_TIM_Base_Start_IT(tim_handle);
 }
 
+void MPU6050_Reset(void){
+	__NVIC_SystemReset();
+}
+
 void Mpu6050_Write(uint8_t adress,uint8_t data)
 {
 	unsigned char Buff[2];
@@ -61,37 +63,88 @@ unsigned char Mpu6050_Read(uint8_t adress)
 	return data;
 }
 
-float getAntiDriffCoefficient(uint8_t numSample){
+float getAntiDriffCoefficient(uint8_t numSample, axis_e axis){
 	int byteL, byteH;
 
 	int16_t sumAntiDriffVal = 0;
 	float avgDriff = 0;
 	HAL_TIM_Base_Stop_IT(tim_handle);
-	for(uint8_t i_cnt = 0; i_cnt < numSample; i_cnt++){
-		byteH = Mpu6050_Read(GYRO_ZOUT_H);
-		byteL = Mpu6050_Read(GYRO_ZOUT_L);
-		sumAntiDriffVal +=  ((byteH << 8) | byteL);
-		HAL_Delay(1);
+
+	switch(axis){
+		case AXIS_X:
+			for(uint8_t i_cnt = 0; i_cnt < numSample; i_cnt++){
+				byteH = Mpu6050_Read(GYRO_XOUT_H);
+				byteL = Mpu6050_Read(GYRO_XOUT_L);
+				sumAntiDriffVal +=  ((byteH << 8) | byteL);
+				HAL_Delay(1);
+			}
+			break;
+
+		case AXIS_Y:
+			for(uint8_t i_cnt = 0; i_cnt < numSample; i_cnt++){
+				byteH = Mpu6050_Read(GYRO_YOUT_H);
+				byteL = Mpu6050_Read(GYRO_YOUT_L);
+				sumAntiDriffVal +=  ((byteH << 8) | byteL);
+				HAL_Delay(1);
+			}
+			break;
+
+		case AXIS_Z:
+			for(uint8_t i_cnt = 0; i_cnt < numSample; i_cnt++){
+				byteH = Mpu6050_Read(GYRO_ZOUT_H);
+				byteL = Mpu6050_Read(GYRO_ZOUT_L);
+				sumAntiDriffVal +=  ((byteH << 8) | byteL);
+				HAL_Delay(1);
+			}
+			break;
+		default:
+			break;
 	}
-	avgDriff = (float)sumAntiDriffVal / numSample;
-//	HAL_TIM_Base_Start_IT(tim_handle);
+
+	avgDriff = sumAntiDriffVal / numSample;
+	HAL_TIM_Base_Start_IT(tim_handle);
 	return avgDriff;
 }
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 
 	if((htim->Instance)==tim_handle->Instance)
 	{
-		int H,L;
-		H=Mpu6050_Read(GYRO_ZOUT_H);
-		L=Mpu6050_Read(GYRO_ZOUT_L);
-		hi=(H<<8)|L;
-		a=(hi+43)/1.64;			//he so chong troi
-		mau[0] = mau[0]+(a*0.2);
-		s=mau[0];
-		k=-s;
-		h=k/256;
-		l=k%256;
-		angle=h<<8|l;
+		int zH,zL;
+		int xH,xL;
+		int yH,yL;
+
+		xH = Mpu6050_Read(GYRO_XOUT_H);
+		xL = Mpu6050_Read(GYRO_XOUT_L);
+		xVal = (xH << 8) | xL;
+		xA = ( xVal + driffVal.x_Axis) / 1.64;			//he so chong troi
+		xLastVal = xLastVal + (xA * 0.05);
+		xS = xLastVal;
+//		k = -s;
+//		h = k / 256;
+//		l = k % 256;
+		xAngle = -xS;
+
+
+
+		yH = Mpu6050_Read(GYRO_YOUT_H);
+		yL = Mpu6050_Read(GYRO_YOUT_L);
+		yVal = (yH << 8) | yL;
+		yA = ( yVal + driffVal.y_Axis) / 1.64;			//he so chong troi
+		yLastVal = yLastVal + (yA * 0.05);
+		yS = yLastVal;
+		yAngle = -yS;
+
+
+		zH = Mpu6050_Read(GYRO_ZOUT_H);
+		zL = Mpu6050_Read(GYRO_ZOUT_L);
+		zVal = (zH << 8) | zL;
+		zA = ( zVal + driffVal.z_Axis) / 1.64;			//he so chong troi
+		zLastVal = zLastVal + (zA * 0.05);
+		zS = zLastVal;
+		zAngle = -zS;
 	}
 }
+
+
