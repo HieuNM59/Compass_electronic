@@ -56,9 +56,9 @@ void ledBlink(void){
 }
 void mainInit(void){
 	DWT_Delay_Init();
-	driffVal.x_Axis = Flash_Read_Int(SAVE_X_AXIS_ADDR);
-	driffVal.y_Axis = Flash_Read_Int(SAVE_Y_AXIS_ADDR);
-	driffVal.z_Axis = Flash_Read_Int(SAVE_Z_AXIS_ADDR);
+	driffVal.x_Axis = (int16_t)Flash_Read_Int(SAVE_X_AXIS_ADDR);
+	driffVal.y_Axis = (int16_t)Flash_Read_Int(SAVE_Y_AXIS_ADDR);
+	driffVal.z_Axis = (int16_t)Flash_Read_Int(SAVE_Z_AXIS_ADDR);
 
 	if((driffVal.x_Axis == 0xFFFF) || (driffVal.x_Axis == 0xFFFF) || (driffVal.z_Axis == 0xFFFF)){
 		Mpu6050_Init(&hi2c1, &htim2);
@@ -115,7 +115,6 @@ void mainProcess(void){
 		driffVal.z_Axis = getAntiDriffCoefficient(100, AXIS_Z);
 		driffVal.z_Axis = -driffVal.z_Axis;
 
-
 		Flash_Erase(SAVE_X_AXIS_ADDR);
 		Flash_Write_Int(SAVE_X_AXIS_ADDR, driffVal.x_Axis);
 		Flash_Write_Int(SAVE_Y_AXIS_ADDR, driffVal.y_Axis);
@@ -134,7 +133,8 @@ void sendAngleToMain(void){
 	else{
 		return;
 	}
-	switch (g_mcuPollState) {
+
+	switch (g_mcuPollState){
 		case GET_X_AXIS:
 			g_timeBlinkLed = 150;
 			payload[0] = xAngle & 0xFF;
