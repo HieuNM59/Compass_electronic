@@ -55,14 +55,15 @@ compass_stm32f103c8.list \
 
 
 # All Target
-all: main-build
+all:
+	+@$(MAKE) --no-print-directory main-build && $(MAKE) --no-print-directory post-build
 
 # Main-build Target
 main-build: compass_stm32f103c8.elf secondary-outputs
 
 # Tool invocations
-compass_stm32f103c8.elf compass_stm32f103c8.map: $(OBJS) $(USER_OBJS) C:\Users\LumiQA\STM32CubeIDE\workspace_1.12.0\compass_stm32f103c8\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "compass_stm32f103c8.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\LumiQA\STM32CubeIDE\workspace_1.12.0\compass_stm32f103c8\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="compass_stm32f103c8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+compass_stm32f103c8.elf compass_stm32f103c8.map: $(OBJS) $(USER_OBJS) C:\Users\HieuNM\Desktop\Compass_electronic\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "compass_stm32f103c8.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\HieuNM\Desktop\Compass_electronic\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="compass_stm32f103c8.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -81,6 +82,10 @@ clean:
 	-$(RM) compass_stm32f103c8.elf compass_stm32f103c8.list compass_stm32f103c8.map default.size.stdout
 	-@echo ' '
 
+post-build:
+	arm-none-eabi-objcopy -O ihex compass_stm32f103c8.elf compass_stm32f103c8.hex
+	-@echo ' '
+
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
 
 fail-specified-linker-script-missing:
@@ -90,6 +95,6 @@ fail-specified-linker-script-missing:
 warn-no-linker-script-specified:
 	@echo 'Warning: No linker script specified. Check the linker settings in the build configuration.'
 
-.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified
+.PHONY: all clean dependents main-build fail-specified-linker-script-missing warn-no-linker-script-specified post-build
 
 -include ../makefile.targets

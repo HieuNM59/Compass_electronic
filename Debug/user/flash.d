@@ -1,5 +1,5 @@
 user/flash.o: ../user/flash.c \
- C:/Users/LumiQA/STM32CubeIDE/workspace_1.12.0/compass_stm32f103c8/user/flash.h \
+ C:/Users/HieuNM/Desktop/Compass_electronic/user/flash.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -26,7 +26,7 @@ user/flash.o: ../user/flash.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
-C:/Users/LumiQA/STM32CubeIDE/workspace_1.12.0/compass_stm32f103c8/user/flash.h:
+C:/Users/HieuNM/Desktop/Compass_electronic/user/flash.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h:

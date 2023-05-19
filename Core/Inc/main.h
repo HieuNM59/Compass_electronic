@@ -61,6 +61,14 @@ void Error_Handler(void);
 #define BUTTON_GPIO_Port GPIOC
 #define LED_Pin GPIO_PIN_3
 #define LED_GPIO_Port GPIOA
+#define XCL_Pin GPIO_PIN_6
+#define XCL_GPIO_Port GPIOA
+#define XDA_Pin GPIO_PIN_7
+#define XDA_GPIO_Port GPIOA
+#define AD0_Pin GPIO_PIN_8
+#define AD0_GPIO_Port GPIOB
+#define INT_Pin GPIO_PIN_9
+#define INT_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

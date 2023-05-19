@@ -30,6 +30,9 @@ typedef enum {
 	GET_X_AXIS,
 	GET_Y_AXIS,
 	GET_Z_AXIS,
+	GET_X_AXIS_ONE_TIME,
+	GET_Y_AXIS_ONE_TIME,
+	GET_Z_AXIS_ONE_TIME,
 	RESET_MCU,
 	CALIB,
 }get_state_e;
@@ -155,6 +158,30 @@ void sendAngleToMain(void){
 			payload[1] = (zAngle >> 8) & 0xFF;
 			HAL_UART_Transmit(&huart1, payload, 2, 100);
 			break;
+
+		case GET_X_AXIS_ONE_TIME:
+			g_timeBlinkLed = 150;
+			payload[0] = xAngle & 0xFF;
+			payload[1] = (xAngle >> 8) & 0xFF;
+			HAL_UART_Transmit(&huart1, payload, 2, 100);
+			g_mcuPollState = STATE_IDLE;
+			break;
+
+		case GET_Y_AXIS_ONE_TIME:
+			g_timeBlinkLed = 150;
+			payload[0] = yAngle & 0xFF;
+			payload[1] = (yAngle >> 8) & 0xFF;
+			HAL_UART_Transmit(&huart1, payload, 2, 100);
+			g_mcuPollState = STATE_IDLE;
+			break;
+
+		case GET_Z_AXIS_ONE_TIME:
+			g_timeBlinkLed = 150;
+			payload[0] = zAngle & 0xFF;
+			payload[1] = (zAngle >> 8) & 0xFF;
+			HAL_UART_Transmit(&huart1, payload, 2, 100);
+			g_mcuPollState = STATE_IDLE;
+			break;
 		default:
 			g_timeBlinkLed = 1000;
 			break;
@@ -176,6 +203,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			break;
 		case 'Z':
 			g_mcuPollState = GET_Z_AXIS;
+			break;
+
+		case 'x':
+			g_mcuPollState = GET_X_AXIS_ONE_TIME;
+			break;
+		case 'y':
+			g_mcuPollState = GET_Y_AXIS_ONE_TIME;
+			break;
+		case 'z':
+			g_mcuPollState = GET_Z_AXIS_ONE_TIME;
 			break;
 		case 'F':
 			g_mcuPollState = CALIB;
