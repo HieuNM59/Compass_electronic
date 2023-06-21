@@ -108,7 +108,6 @@ float getAntiDriffCoefficient(uint8_t numSample, axis_e axis){
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-
 	if((htim->Instance)==tim_handle->Instance)
 	{
 		int zH,zL;
@@ -118,9 +117,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		xH = Mpu6050_Read(GYRO_XOUT_H);
 		xL = Mpu6050_Read(GYRO_XOUT_L);
 		xVal = (xH << 8) | xL;
-		xA = ( xVal + driffVal.x_Axis) / 1.64;			//he so chong troi
-		xLastVal = xLastVal + (xA * 0.05);
-		xAngle = -xLastVal;
+		xA = ( xVal + driffVal.x_Axis) / 1.64;			// he so chong troi
+		xLastVal = xLastVal + (xA * 0.05);				// 0.05 = timer 50ms Tinh theo fOSC = 36Mhz
+//		xAngle = -xLastVal;								//
 
 
 
@@ -128,16 +127,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		yL = Mpu6050_Read(GYRO_YOUT_L);
 		yVal = (yH << 8) | yL;
 		yA = ( yVal + driffVal.y_Axis) / 1.64;			//he so chong troi
-		yLastVal = yLastVal + (yA * 0.05);
-		yAngle = -yLastVal;
+		yLastVal = yLastVal + (yA * 0.05);				// 0.05 = timer 50ms Tinh theo fOSC = 36Mhz
+//		yAngle = -yLastVal;
 
 
 		zH = Mpu6050_Read(GYRO_ZOUT_H);
 		zL = Mpu6050_Read(GYRO_ZOUT_L);
 		zVal = (zH << 8) | zL;
 		zA = ( zVal + driffVal.z_Axis) / 1.64;			//he so chong troi
-		zLastVal = zLastVal + (zA * 0.05);
-		zAngle = -zLastVal;
+		zLastVal = zLastVal + (zA * 0.05);				// 0.05 = timer 50ms Tinh theo fOSC = 36Mhz
+//		zAngle = -zLastVal;
 	}
 }
 

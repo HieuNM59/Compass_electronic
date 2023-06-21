@@ -8,6 +8,8 @@
 #ifndef MAIN_APP_H_
 #define MAIN_APP_H_
 
+void mainInit(void);
+void mainProcess(void);
 
 
 #endif /* MAIN_APP_H_ */

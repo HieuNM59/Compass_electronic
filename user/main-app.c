@@ -89,7 +89,6 @@ void mainInit(void){
 
 void mainProcess(void){
 
-
 	sendAngleToMain();
 
 	buttonHoldScan();
@@ -195,23 +194,26 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			g_mcuPollState = RESET_MCU;
 			NVIC_SystemReset();
 			break;
-		case 'X':
+		case 'a':
+			g_mcuPollState = RESET_MCU;
+			NVIC_SystemReset();
+			break;
+		case 'x':
 			g_mcuPollState = GET_X_AXIS;
 			break;
-		case 'Y':
+		case 'y':
 			g_mcuPollState = GET_Y_AXIS;
 			break;
-		case 'Z':
+		case 'z':
 			g_mcuPollState = GET_Z_AXIS;
 			break;
-
-		case 'x':
+		case 'X':
 			g_mcuPollState = GET_X_AXIS_ONE_TIME;
 			break;
-		case 'y':
+		case 'Y':
 			g_mcuPollState = GET_Y_AXIS_ONE_TIME;
 			break;
-		case 'z':
+		case 'Z':
 			g_mcuPollState = GET_Z_AXIS_ONE_TIME;
 			break;
 		case 'F':
