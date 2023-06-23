@@ -119,7 +119,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		xVal = (xH << 8) | xL;
 		xA = ( xVal + driffVal.x_Axis) / 1.64;			// he so chong troi
 		xLastVal = xLastVal + (xA * 0.05);				// 0.05 = timer 50ms Tinh theo fOSC = 36Mhz
-//		xAngle = -xLastVal;								//
+		xAngle = xLastVal;								//
 
 
 
@@ -128,7 +128,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		yVal = (yH << 8) | yL;
 		yA = ( yVal + driffVal.y_Axis) / 1.64;			//he so chong troi
 		yLastVal = yLastVal + (yA * 0.05);				// 0.05 = timer 50ms Tinh theo fOSC = 36Mhz
-//		yAngle = -yLastVal;
+		yAngle = yLastVal;
 
 
 		zH = Mpu6050_Read(GYRO_ZOUT_H);
@@ -136,7 +136,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		zVal = (zH << 8) | zL;
 		zA = ( zVal + driffVal.z_Axis) / 1.64;			//he so chong troi
 		zLastVal = zLastVal + (zA * 0.05);				// 0.05 = timer 50ms Tinh theo fOSC = 36Mhz
-//		zAngle = -zLastVal;
+		zAngle = zLastVal;
 	}
 }
 

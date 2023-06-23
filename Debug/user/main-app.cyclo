@@ -1,6 +1,6 @@
 core_cm3.h:1762:34:__NVIC_SystemReset	1
-main-app.c:48:6:ledBlink	2
-main-app.c:60:6:mainInit	3
-main-app.c:90:6:mainProcess	4
-main-app.c:129:6:sendAngleToMain	8
-main-app.c:189:6:HAL_UART_RxCpltCallback	9
+main-app.c:51:6:ledBlink	2
+main-app.c:63:6:mainInit	3
+main-app.c:93:6:mainProcess	5
+main-app.c:132:6:sendAngleToMain	8
+main-app.c:198:6:HAL_UART_RxCpltCallback	9
