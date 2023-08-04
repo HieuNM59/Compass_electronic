@@ -103,28 +103,39 @@ void mainProcess(void){
 		ledBlink();
 	}
 
-	if(g_buttonEvent == HOLD_3S || g_mcuPollState == CALIB){
+	if(g_buttonEvent == HOLD_2S || g_mcuPollState == CALIB){
+		// Blink led
 		HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
+		for(uint8_t i = 0; i < 3; i++){
+			HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+			HAL_Delay(50);
+		}
+		HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
+
 		if(g_mcuPollState == CALIB){
 			HAL_Delay(2000);
 		}
 		else{
-			HAL_Delay(5000);
+			HAL_Delay(3000);
 		}
-
-		driffVal.x_Axis = getAntiDriffCoefficient(100, AXIS_X);
+		HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
+		driffVal.x_Axis = getAntiDriffCoefficient(20, AXIS_X);
 		driffVal.x_Axis = -driffVal.x_Axis;
+		HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
 
-		driffVal.y_Axis = getAntiDriffCoefficient(100, AXIS_Y);
+		driffVal.y_Axis = getAntiDriffCoefficient(20, AXIS_Y);
 		driffVal.y_Axis = -driffVal.y_Axis;
+		HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
 
-		driffVal.z_Axis = getAntiDriffCoefficient(100, AXIS_Z);
+		driffVal.z_Axis = getAntiDriffCoefficient(20, AXIS_Z);
 		driffVal.z_Axis = -driffVal.z_Axis;
+		HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
 
 		Flash_Erase(SAVE_X_AXIS_ADDR);
 		Flash_Write_Int(SAVE_X_AXIS_ADDR, driffVal.x_Axis);
 		Flash_Write_Int(SAVE_Y_AXIS_ADDR, driffVal.y_Axis);
 		Flash_Write_Int(SAVE_Z_AXIS_ADDR, driffVal.z_Axis);
+		HAL_Delay(50);
 		NVIC_SystemReset();
 	}
 }

@@ -29,10 +29,10 @@ void buttonHoldScan(void){
 			btnCount = 0;
 		}
 
-		if(btnCount > TIME_HOLD_3S){
-			g_buttonEvent = HOLD_3S;
+		if(btnCount >= TIME_HOLD_2S){
+			g_buttonEvent = HOLD_2S;
 		}
-		else if(btnCount > 2 && btnCount < 29){
+		else if(btnCount >= 1 && btnCount < 19){
 			g_buttonEvent = HOLD_1S;
 		}
 		else{

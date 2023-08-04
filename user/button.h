@@ -10,6 +10,7 @@
 
 typedef enum {
 	IDLE = 0,
+	HOLD_SHORT,
 	HOLD_1S,
 	HOLD_2S,
 	HOLD_3S,
